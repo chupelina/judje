@@ -1,18 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-     <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Judge v2</title>
-
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600">
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/css/style.css">
-        <script src="/js/jquery-3.3.1.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
-</head>
+<head th:include="~{/temp/head}"></head>
 
 <body>
     <div class="container ">
@@ -46,39 +35,39 @@
                 <div class="bg-white tm-block">
                     <div class="row mt-2">
                         <div class="col-12">
-                            <form action="#" method="" class="tm-login-form">
+                            <form action="/users/register" method="POST" th:object="${userRegisterBindingModel}" class="tm-login-form">
                                 <div class="input-group">
                                     <label for="username" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Username</label>
-                                    <input name="username" type="text" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
+                                    <input th:field="*{username}"  th:errorclass="bg-danger" name="username" type="text" class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
                                            id="username" placeholder="Enter username">
 									<div class="mx-auto">
-										<small class="text-danger">Username must be between 2 and 10 characters</small>
+										<small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger">Username must be between 2 and 10 characters</small>
 									</div>
                                 </div>
                                 <div class="input-group mt-3">
                                     <label for="password" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Password</label>
-                                    <input name="password" type="password" class="form-control validate"
+                                    <input th:field="*{password}" th:errorclass="bg-danger"  name="password" type="password" class="form-control validate"
                                            id="password" placeholder="Enter password">
 									<div class="mx-auto">
-										<small class="text-danger">Password must be betweeen 3 and 10 characters</small>
+										<small th:if="${#fields.hasErrors('password')}" class="text-danger">Password must be betweeen 3 and 10 characters</small>
 									</div>
                                 </div>
                                 <div class="input-group mt-3">
-                                    <label for="confirmPassword" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Confirm Password</label>
-                                    <input name="confirmPassword" type="password" class="form-control validate" id="confirmPassword" placeholder="Confirm password" >
+                                    <label  for="confirmPassword" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Confirm Password</label>
+                                    <input th:field="*{confirmPassword}" name="confirmPassword" type="password" class="form-control validate" id="confirmPassword" placeholder="Confirm password" >
                                 </div>
                                 <div class="input-group mt-3">
                                     <label for="email" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Email</label>
-                                    <input name="email" type="email" class="form-control validate" id="email" placeholder="Enter email">
+                                    <input th:field="*{email}" th:errorclass="bg-danger"  name="email" type="email" class="form-control validate" id="email" placeholder="Enter email">
 									<div class="mx-auto">
-										<small class="text-danger">Enter valid email address</small>
+										<small th:if="${#fields.hasErrors('email')}" class="text-danger">Enter valid email address</small>
 									</div>
                                 </div>
                                 <div class="input-group mt-3">
                                     <label for="git" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Git</label>
-                                    <input name="git" type="text" class="form-control validate" id="git" placeholder="Enter git">
+                                    <input th:field="*{git}" th:errorclass="bg-danger"  name="git" type="text" class="form-control validate" id="git" placeholder="Enter git">
 									<div class="mx-auto text-center align-content-center">
-										<small class="text-danger" >Enter git address following this pattern </small>
+										<small th:if="${#fields.hasErrors('git')}" class="text-danger" >Enter git address following this pattern </small>
 									</div>
                                 </div>
                                 <div class="input-group mt-3">
