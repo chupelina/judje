@@ -1,4 +1,4 @@
-<div class="col-12">
+<div class="col-12"  xmlns:th="http://www.thymeleaf.org">
     <nav class="navbar navbar-expand-xl navbar-light bg-light rounded" >
         <a class="navbar-brand" href="/">
             <h1 class="tm-site-title mb-0">Judge v2</h1>
@@ -12,19 +12,19 @@
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item" >
                     <a class="nav-link" href="#">
-                        <span>Hello {username}</span>
+                        <span>Hello <small th:text="${@currentUser.username}"></small></span>
                     </a>
                 </li>
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" th:if="${@currentUser.isAdmin()}">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                        role="button" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
                         Admin
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Add Exercise</a>
-                        <a class="dropdown-item" href="#">Add Role</a>
+                        <a class="dropdown-item" href="/exercises/add">Add Exercise</a>
+                        <a class="dropdown-item" href="/roles/add">Add Role</a>
 
                     </div>
                 </li>
@@ -43,7 +43,7 @@
             <ul class="navbar-nav">
 
                 <li class="nav-item">
-                    <a class="nav-link d-flex" href="#">
+                    <a class="nav-link d-flex" href="/users/logout">
                         <span>Logout</span>
                     </a>
                 </li>

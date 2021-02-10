@@ -3,6 +3,7 @@ package com.softuni.web;
 import com.softuni.model.binding.UserLoginBindingModel;
 import com.softuni.model.binding.UserRegisterBidingModel;
 import com.softuni.model.entity.service.UserServiceModel;
+import com.softuni.security.CurrentUser;
 import com.softuni.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -24,9 +25,11 @@ public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
 
-    public UserController(UserService userService, ModelMapper modelMapper) {
+
+    public UserController(UserService userService, ModelMapper modelMapper ) {
         this.userService = userService;
         this.modelMapper = modelMapper;
+
     }
 
     @GetMapping("/login")
@@ -59,7 +62,7 @@ public class UserController {
 
            return "redirect:login";
         }
-        httpSession.setAttribute("user", user);
+        userService.login(user);
 
         return  "redirect:/";
     }
@@ -88,5 +91,11 @@ public class UserController {
                 .map(userRegisterBindingModel, UserServiceModel.class);
         userService.registerUser(userServiceModel);
         return "redirect:login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        userService.logout();
+        return "redirect:/";
     }
 }
