@@ -9,6 +9,7 @@ import com.softuni.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -58,5 +59,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public void logout() {
         currentUser.setUsername(null).setRole(null).setId(null);
+    }
+
+    @Override
+    public List<String> getAllUsersByName() {
+        return userRepository.findAllUsernames();
+    }
+
+    @Override
+    public void changeUserRole(String userName, String roleStr) {
+        UserEntity userEntity = userRepository.findByUsername(userName).get();
+        userEntity.setRole(roleService.findRole((roleStr).toUpperCase()));
+        userRepository.save(userEntity);
     }
 }
