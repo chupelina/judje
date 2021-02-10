@@ -2,7 +2,6 @@ package com.softuni.web;
 
 import com.softuni.model.binding.ExerciseAddBindingModel;
 import com.softuni.service.ExerciseService;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,11 +18,10 @@ import javax.validation.Valid;
 public class ExerciseController {
 
     private final ExerciseService exerciseService;
-    private final ModelMapper modelMapper;
 
-    public ExerciseController(ExerciseService exerciseService, ModelMapper modelMapper) {
+
+    public ExerciseController(ExerciseService exerciseService) {
         this.exerciseService = exerciseService;
-        this.modelMapper = modelMapper;
     }
 
 
