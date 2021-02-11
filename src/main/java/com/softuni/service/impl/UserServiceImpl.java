@@ -1,6 +1,7 @@
 package com.softuni.service.impl;
 
 import com.softuni.model.entity.UserEntity;
+import com.softuni.model.entity.enums.RoleEnum;
 import com.softuni.model.entity.service.UserServiceModel;
 import com.softuni.repository.UserRepository;
 import com.softuni.security.CurrentUser;
@@ -37,7 +38,7 @@ public class UserServiceImpl implements UserService {
         userEntity.setPassword(userServiceModel.getPassword());
         if (userRepository.count() == 0) {
             userEntity.setRole(roleService.findRole("ADMIN"));
-        }else{
+        } else {
             userEntity.setRole(roleService.findRole("USER"));
         }
         userRepository.save(userEntity);
@@ -69,7 +70,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void changeUserRole(String userName, String roleStr) {
         UserEntity userEntity = userRepository.findByUsername(userName).get();
-        userEntity.setRole(roleService.findRole((roleStr).toUpperCase()));
-        userRepository.save(userEntity);
+        if (userEntity.getRole().getName() != RoleEnum.valueOf(roleStr.toUpperCase())) {
+            userEntity.setRole(roleService.findRole((roleStr).toUpperCase()));
+            userRepository.save(userEntity);
+        }
+
+    }
+
+    @Override
+    public UserEntity findById(Long id) {
+        return userRepository.findById(id).get();
     }
 }

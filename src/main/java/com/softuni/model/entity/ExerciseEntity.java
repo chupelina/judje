@@ -1,6 +1,7 @@
 package com.softuni.model.entity;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.Instant;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "exercises")
 public class ExerciseEntity extends BaseEntity {
+    @Column(unique = true, nullable = false)
     private String name;
     private LocalDateTime startedOn;
     private LocalDateTime dueDate;
