@@ -1,5 +1,6 @@
 package com.softuni.repository;
 
+import com.softuni.model.entity.HomeworkEntity;
 import com.softuni.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,4 +17,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     List<String> findAllUsernames();
 
     Optional<UserEntity> findByUsername(String username);
+
+    @Query("select (u.homeworks) from UserEntity u  where u.id = :id ")
+    List<HomeworkEntity> findAllHomeworks(Long id);
 }

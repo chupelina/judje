@@ -1,5 +1,6 @@
 package com.softuni.service;
 
+import com.softuni.model.binding.CurrentUserInfoViewModel;
 import com.softuni.model.entity.UserEntity;
 import com.softuni.model.entity.service.UserServiceModel;
 
@@ -19,4 +20,6 @@ public interface UserService {
     void changeUserRole(String userName, String roleStr);
 
     UserEntity findById(Long id);
+
+    CurrentUserInfoViewModel findCurrentUserInfo(Long id);
 }

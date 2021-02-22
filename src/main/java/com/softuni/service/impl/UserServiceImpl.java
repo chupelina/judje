@@ -1,10 +1,12 @@
 package com.softuni.service.impl;
 
+import com.softuni.model.binding.CurrentUserInfoViewModel;
 import com.softuni.model.entity.UserEntity;
 import com.softuni.model.entity.enums.RoleEnum;
 import com.softuni.model.entity.service.UserServiceModel;
 import com.softuni.repository.UserRepository;
 import com.softuni.security.CurrentUser;
+import com.softuni.service.HomeworkService;
 import com.softuni.service.RoleService;
 import com.softuni.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,6 +22,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleService roleService;
     private final CurrentUser currentUser;
+
 
     public UserServiceImpl(ModelMapper modelMapper, UserRepository userRepository, RoleService roleService, CurrentUser currentUser) {
         this.modelMapper = modelMapper;
@@ -80,5 +84,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity findById(Long id) {
         return userRepository.findById(id).get();
+    }
+
+    @Override
+    public CurrentUserInfoViewModel findCurrentUserInfo(Long id) {
+        UserEntity entity = findById(id);
+        String sentHomeworks = userRepository.findAllHomeworks(id).stream().map(h->
+                h.getExercise().getName()).collect(Collectors.joining(", "));
+        CurrentUserInfoViewModel curr = new CurrentUserInfoViewModel();
+        curr.setId(id).setEmail(entity.getEmail())
+                .setGithubAddress(entity.getGit())
+                .setUsername(entity.getUsername())
+                .setAllSentHomeworks(sentHomeworks);
+        return curr;
     }
 }

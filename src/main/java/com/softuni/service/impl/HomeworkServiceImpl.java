@@ -6,10 +6,10 @@ import com.softuni.security.CurrentUser;
 import com.softuni.service.ExerciseService;
 import com.softuni.service.HomeworkService;
 import com.softuni.service.UserService;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 
 @Service
 public class HomeworkServiceImpl implements HomeworkService {
@@ -35,4 +35,5 @@ public class HomeworkServiceImpl implements HomeworkService {
                 .setAuthor(userService.findById(currentUser.getId()));
         homeworkRepository.save(homework);
     }
+
 }

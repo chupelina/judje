@@ -1,6 +1,7 @@
 package com.softuni.model.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name= "users")
@@ -14,6 +15,17 @@ public class UserEntity extends BaseEntity {
     private String git;
     @ManyToOne
     private RoleEntity role;
+    @OneToMany(mappedBy = "author")
+    private List<HomeworkEntity> homeworks;
+
+    public List<HomeworkEntity> getHomeworks() {
+        return homeworks;
+    }
+
+    public UserEntity setHomeworks(List<HomeworkEntity> homeworks) {
+        this.homeworks = homeworks;
+        return this;
+    }
 
     public String getUsername() {
         return username;
