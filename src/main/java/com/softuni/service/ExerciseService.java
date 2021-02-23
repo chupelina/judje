@@ -12,4 +12,6 @@ public interface ExerciseService {
     boolean checkIsLate(String exercise);
 
     ExerciseEntity getExerciseByName(String exercise);
+
+
 }

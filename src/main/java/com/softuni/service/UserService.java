@@ -22,4 +22,6 @@ public interface UserService {
     UserEntity findById(Long id);
 
     CurrentUserInfoViewModel findCurrentUserInfo(Long id);
+
+    Long getAllUsers();
 }

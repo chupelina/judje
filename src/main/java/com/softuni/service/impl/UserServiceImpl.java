@@ -98,4 +98,11 @@ public class UserServiceImpl implements UserService {
                 .setAllSentHomeworks(sentHomeworks);
         return curr;
     }
+
+    @Override
+    public Long getAllUsers() {
+        return userRepository.count();
+    }
+
+
 }

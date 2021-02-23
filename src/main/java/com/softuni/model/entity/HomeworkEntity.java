@@ -1,10 +1,8 @@
 package com.softuni.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "homeworks")
@@ -16,6 +14,8 @@ public class HomeworkEntity extends BaseEntity {
     private UserEntity author;
     @ManyToOne
     private ExerciseEntity exercise;
+    @OneToMany(mappedBy = "homework", fetch = FetchType.EAGER)
+    private Set<CommentEntity> comments;
 
     public LocalDateTime getAddedOn() {
         return addedOn;

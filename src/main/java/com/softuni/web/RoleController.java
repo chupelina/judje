@@ -26,8 +26,6 @@ public class RoleController {
     @PostMapping("/add")
     public String addConfirm(@RequestParam String username, @RequestParam
                              String role){
-        String a = username;
-        String b = role;
         userService.changeUserRole(username, role);
         return "redirect:/";
     }

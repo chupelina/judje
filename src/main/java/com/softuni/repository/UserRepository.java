@@ -20,4 +20,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     @Query("select (u.homeworks) from UserEntity u  where u.id = :id ")
     List<HomeworkEntity> findAllHomeworks(Long id);
+
+
 }
